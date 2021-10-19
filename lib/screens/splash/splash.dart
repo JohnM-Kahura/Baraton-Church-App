@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:baratonchurch/screens/auth/Auth.dart';
+import 'package:baratonchurch/screens/home/mainactivity.dart';
 import 'package:baratonchurch/screens/splash/data.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,7 +20,7 @@ class _SplashState extends State<Splash> {
     Timer(
         const Duration(seconds: 4),
         () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => Auth())));
+            context, MaterialPageRoute(builder: (context) => MainActivity())));
   }
 
   @override

@@ -3,10 +3,11 @@
 import 'dart:io';
 
 import 'package:baratonchurch/screens/home/mainactivity.dart';
+import 'package:baratonchurch/utils/student.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Auth extends StatefulWidget {
   const Auth({Key? key}) : super(key: key);
@@ -30,27 +31,24 @@ class _AuthState extends State<Auth> {
   String middleName = '';
   String lastName = '';
   String studentId = '';
+  // this will be used in an online authentication
   String firstNameAdmin = '';
   String studentIdAdmin = '';
   String password = '';
-  Future writeFirstName(String value) async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setString('firstName', value);
-  }
-
-  Future writeMiddleName(String value) async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setString('middleName', value);
-  }
-
-  Future writeLastName(String value) async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setString('lastName', value);
-  }
-
-  Future writeStudentId(String value) async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setString('studentId', value);
+  void addToHive(String firstName, String middleName, String lastName,
+      String studentId) async {
+    final appDir = await getApplicationDocumentsDirectory();
+    Hive
+      ..init(appDir.path)
+      ..registerAdapter(StudentAdapter());
+    var box = await Hive.openBox('students');
+    box.put(
+        'student',
+        Student(
+            firstName: firstName,
+            middleName: middleName,
+            lastName: lastName,
+            studentId: studentId));
   }
 
   @override
@@ -176,11 +174,8 @@ class _AuthState extends State<Auth> {
                             middleName = middleNameController.text;
                             lastName = lastNameController.text;
                             studentId = studentIdController.text;
-                            writeFirstName(firstName);
-                            writeMiddleName(middleName);
-                            writeLastName(lastName);
-                            writeStudentId(studentId);
-
+                            addToHive(
+                                firstName, middleName, lastName, studentId);
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
@@ -270,6 +265,7 @@ class _AuthState extends State<Auth> {
                             firstNameAdmin = firstNameAdminController.text;
                             studentIdAdmin = studentIdAdminController.text;
                             password = passwordController.text;
+
                             print(firstName);
                             print(studentIdAdmin);
                             print(password);

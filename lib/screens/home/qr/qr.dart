@@ -1,5 +1,7 @@
 import 'package:baratonchurch/utils/student.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,52 +17,25 @@ class _QrCodeState extends State<QrCode> {
   String middleName = '';
   String lastName = '';
   String studentId = '';
-  Future readFirstName() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    setState(() {
-      firstName = pref.getString('firstName')!;
-    });
-  }
 
-  Future readMiddleName() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    setState(() {
-      middleName = pref.getString('middleName')!;
-    });
-  }
+  reedFromHive() async {
+    final appDir = await getApplicationDocumentsDirectory();
 
-  Future readLastName() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
+    var box = await Hive.openBox('students');
+    var student = box.get('student');
     setState(() {
-      lastName = pref.getString('lastName')!;
+      firstName = student.firstName;
+      middleName = student.middleName;
+      lastName = student.lastName;
+      studentId = student.studentId;
     });
-  }
-
-  Future readStudentId() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    setState(() {
-      studentId = pref.getString('studentId')!;
-    });
-  }
-
-  Future clear() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.clear();
   }
 
   @override
   void initState() {
-    readFirstName();
-    readMiddleName();
-    readLastName();
-    readStudentId();
-    clear();
+    reedFromHive();
 
     super.initState();
-    print('firstname' + firstName);
-    print('middlename' + middleName);
-    print('lastname' + lastName);
-    print('studentId' + studentId);
   }
 
   @override
@@ -70,7 +45,7 @@ class _QrCodeState extends State<QrCode> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           QrImage(
-            data: 'SKAHMU2011',
+            data: studentId,
           ),
           Text(firstName + middleName + lastName + studentId)
         ],
