@@ -16,7 +16,7 @@ class _MainActivityState extends State<MainActivity> {
   int _currentIndex = 0;
   //tabs in the app
   List<Widget> tabs = [Home(), QrCode(), Offerings(), Settings()];
-  List title = ['Home', 'Qr Code', 'Offerings', 'Settings'];
+  List title = ['Home', 'Qr Code', 'Payments', 'Settings'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
