@@ -1,9 +1,11 @@
 import 'package:baratonchurch/screens/splash/splash.dart';
 import 'package:flutter/material.dart';
+import 'package:mpesa_flutter_plugin/mpesa_flutter_plugin.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  MpesaFlutterPlugin.setConsumerKey('dL5sUnnKpljL9i8ZE7wrRcfAhJnvzh7I');
+  MpesaFlutterPlugin.setConsumerSecret('7LysPoq22BeGxYWF');
   runApp(const MyApp());
 }
 
