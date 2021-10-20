@@ -12,11 +12,14 @@ class _OfferingsState extends State<Offerings> {
   final String text =
       '''Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
 molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum''';
+  List title=['Offerings','Tithes','Contributions'];
+  List buttonTitle=['Make payment','Make payment','Contribute'];
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
-          itemCount: 3,
+          itemCount: title.length,
           itemBuilder: (BuildContext context, int index) {
             return Card(
               margin: const EdgeInsets.only(top: 5),
@@ -31,7 +34,7 @@ molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum''';
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Offering ',
+                            title[index],
                             style: GoogleFonts.oxygen(
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
@@ -42,6 +45,7 @@ molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum''';
                             text,
                             style: GoogleFonts.openSansCondensed(
                               fontSize: 15,
+                              color:Colors.white,
                             ),
                           ),
                         ],
@@ -62,7 +66,7 @@ molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum''';
                               ),
                               onPressed: () {},
                               child: Text(
-                                'Make Payment',
+                                buttonTitle[index],
                                 style: GoogleFonts.oxygen(
                                   color: Colors.black,
                                 ),
