@@ -53,30 +53,30 @@ molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum''';
                       ),
                     ),
                     Positioned(
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            TextButton(
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        Colors.white),
-                              ),
-                              onPressed: () {
-                                customDialogue(context);
-                              },
-                              child: Text(
-                                buttonTitle[index],
-                                style: GoogleFonts.oxygen(
-                                  color: Colors.black,
-                                ),
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          TextButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.white),
+                            ),
+                            onPressed: () {
+                              customDialogue(context);
+                            },
+                            child: Text(
+                              buttonTitle[index],
+                              style: GoogleFonts.oxygen(
+                                color: Colors.black,
                               ),
                             ),
-                          ],
-                        ))
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -171,7 +171,7 @@ customDialogue(BuildContext context) {
                             phone = phone.substring(1);
                             phone = '254' + phone;
 
-                            await startTransaction(
+                          await  startTransaction(
                                 userPhone: phone, amount: double.parse(amount));
                             Navigator.of(context).pop();
                           }
@@ -192,7 +192,7 @@ customDialogue(BuildContext context) {
 Widget customTextFeild(String hint, TextEditingController controller) {
   return TextField(
     keyboardType: TextInputType.number,
-    // autofocus: true,
+    autofocus: true,
     controller: controller,
     decoration: InputDecoration(
       hintText: hint,
@@ -246,6 +246,8 @@ Future<void> startTransaction(
   } catch (e) {
     //For now, console might be useful
     print("CAUGHT EXCEPTION: " + e.toString());
+    // dynamic error = 'An Error Occured Please try agin later';
+    // return error;
 
     /*
       Other 'throws':
