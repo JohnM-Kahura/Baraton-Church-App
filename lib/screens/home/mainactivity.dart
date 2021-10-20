@@ -21,6 +21,7 @@ class _MainActivityState extends State<MainActivity> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: Center(child: Text(title[_currentIndex])),
       ),
       body: tabs[_currentIndex],
