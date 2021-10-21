@@ -21,7 +21,7 @@ class _HomeState extends State<Home> {
               margin: const EdgeInsets.symmetric(vertical: 3),
               height: MediaQuery.of(context).size.width - 120,
               width: double.infinity,
-              color: Colors.red,
+              color: Colors.blueGrey,
               child: Stack(
                 children: [
                   Image(

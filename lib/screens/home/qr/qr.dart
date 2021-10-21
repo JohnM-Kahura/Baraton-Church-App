@@ -1,9 +1,6 @@
-import 'package:baratonchurch/utils/student.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class QrCode extends StatefulWidget {
   const QrCode({Key? key}) : super(key: key);
@@ -13,14 +10,12 @@ class QrCode extends StatefulWidget {
 }
 
 class _QrCodeState extends State<QrCode> {
-  String firstName = '';
-  String middleName = '';
-  String lastName = '';
-  String studentId = '';
+  String firstName = 'empty';
+  String middleName = 'empty';
+  String lastName = 'empty';
+  String studentId = 'empty';
 
-  reedFromHive() async {
-    final appDir = await getApplicationDocumentsDirectory();
-
+  readFromHive() async {
     var box = await Hive.openBox('students');
     var student = box.get('student');
     setState(() {
@@ -33,7 +28,7 @@ class _QrCodeState extends State<QrCode> {
 
   @override
   void initState() {
-    reedFromHive();
+    readFromHive();
 
     super.initState();
   }
