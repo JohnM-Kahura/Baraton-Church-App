@@ -11,7 +11,7 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
-  String firstName = '';
+ static String firstName = '';
   String middleName = '';
   String lastName = '';
   String studentId = '';
@@ -35,8 +35,8 @@ class _SettingsState extends State<Settings> {
 
   //firstname middlename lastname editing  controller
 
-  // TextEditingController fnameEditController =
-  //     TextEditingController();
+  TextEditingController fnameEditController = TextEditingController(text:firstName);
+
   // TextEditingController mnameEditController = TextEditingController();
   // TextEditingController lnameEditController = TextEditingController();
   // TextEditingController studentIdEditController = TextEditingController();
