@@ -11,7 +11,7 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
- static String firstName = '';
+ static String firstName = 'hskdjthjkshj';
   String middleName = '';
   String lastName = '';
   String studentId = '';
